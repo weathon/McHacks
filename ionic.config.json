@@ -1,0 +1,7 @@
+{
+  "name": "McHacks",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
