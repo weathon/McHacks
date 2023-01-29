@@ -2,7 +2,7 @@ import cohere
 
 co = cohere.Client('grqIE4jIdiHJz9llmB8SSzVHRyQ1TVtQMegrOx8u')
 
-def coheresapi (prompt):
+def coheresapi(prompt):
     response = co.generate(  
         model='xlarge',  
         prompt = prompt,  
@@ -12,3 +12,5 @@ def coheresapi (prompt):
 
     drink_idea = response.generations[0].text
     print (drink_idea)
+
+coheresapi("Tell me a joke about food.")
