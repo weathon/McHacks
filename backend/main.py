@@ -4,6 +4,7 @@ from fastapi import FastAPI
 import time, os
 import pandas as pd
 import numpy as np
+import data
 
 app = FastAPI()
 
@@ -75,13 +76,14 @@ def cook():
             last_time_start = time.time()
 
         last_left_height = i[1]
-    with open("cooked.csv","r") as f:
-        return f.read()
-    
+    # with open("cooked.csv","r") as f:
+    #     return f.read()
+    return data.dataprocess()
+
 import cohere
 @app.get("/cohere")
-def cohere:
-    co = ohere.Client('grqIE4jIdiHJz9llmB8SSzVHRyQ1TVtQMegrOx8u')
+def joke():
+    co = cohere.Client('grqIE4jIdiHJz9llmB8SSzVHRyQ1TVtQMegrOx8u')
     def coheresapi(prompt):
         response = co.generate(  
             model='xlarge',  
@@ -93,3 +95,10 @@ def cohere:
         drink_idea = response.generations[0].text
         return drink_idea
     return coheresapi("Tell me a joke about drinks.")
+
+
+
+@app.get("/all_drinks")
+def all():
+    df = pd.read_csv("cooked.csv")
+    return np.array(df)
