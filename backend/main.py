@@ -5,8 +5,17 @@ import time, os
 import pandas as pd
 import numpy as np
 import data
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 true = True
@@ -102,3 +111,16 @@ def joke():
 def all():
     df = pd.read_csv("cooked.csv")
     return np.array(df)
+
+import datetime
+@app.get("/get_cal")
+def get_cal():
+    data = all()
+    res = []
+    for i in data:
+        res.append({
+        "start": i[0],#str(datetime.datetime.fromtimestamp(i[0])),
+        "end": i[1],#str(datetime.datetime.fromtimestamp(i[1])),
+        "title": i[2], 
+        }) 
+    return res
