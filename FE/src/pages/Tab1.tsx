@@ -1,6 +1,7 @@
 import { IonList, IonItem, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonThumbnail, IonImg, IonLabel } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import { IonCard } from '@ionic/react';
+import Reat ,{useState} from react;
 
 
 import './Tab1.css';
@@ -14,8 +15,16 @@ const items: Item[] = [{ src: 'https://quickchart.io/chart?c=%7B%0A%20%20type%3A
 
 
 const Tab1: any = () => {
+  const [data, setData] = useSate([]);
 
- 
+  const Http = new XMLHttpRequest();
+  const url='/cook';
+  Http.open("GET", url);
+  Http.send();
+  
+  Http.onreadystatechange = (e) => {
+    setData(Http.responseText)
+  }
   
   return (
 
@@ -55,7 +64,10 @@ const Tab1: any = () => {
         <IonCardTitle>Total Liquid</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-        Line graph will be inserted
+        Your total liquid intake is {data.latte_ML_ammount + data.soda_ML_amount + + data.Orange_Juice_ML_amount
+        + data.Coke_ML_Ammount + data.flavoured_coke_ML_amount + data.RedBull_ML_amount + data.Flavoured_energydrink_ML_amount + 
+        data.Wine_ML_amount + data.White_Wine_ML_amount + data.Black_Coffee_ML_amount + data.Tomatao_Juice_ML_amount + data.Apple_Juice_ML_amount + data.Mtn_Dew_ML_amount
+    } ml
       </IonCardContent>
       </IonCard>
 
@@ -64,7 +76,7 @@ const Tab1: any = () => {
         <IonCardTitle>Alcohol Content</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-        Bar graph will be inserted
+        Your total alcohol % is {data.alcohol_amount}
       </IonCardContent>
       </IonCard>
 
@@ -73,7 +85,7 @@ const Tab1: any = () => {
         <IonCardTitle>Coffee Content</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-        Bar graph will be inserted
+        Your total coffee content is {data.coffee_ML} ml
       </IonCardContent>
       </IonCard>
 
