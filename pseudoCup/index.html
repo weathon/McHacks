@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Distance Sensor:
+    <br />
+    <input type="range" min="1" max="100" value="50" id="distance">
+    <br />
+
+    Color Sensor:
+    <br />
+    <input type="range" min="1" max="100" value="50" id="color1">
+    <input type="range" min="1" max="100" value="50" id="color2">
+    <input type="range" min="1" max="100" value="50" id="color3">
+    <br />
+
+    CO2 Sensor
+    <br />
+    <input type="checkbox" id="CO2">
+    <br />
+
+    EtOH Sensor
+    <br />
+    <input type="range" min="1" max="100" value="50" id="EtOH">
+    <br />
+
+    Acceleration
+    <br />
+    <input type="range" min="1" max="100" value="50" id="acc2">
+    <input type="range" min="1" max="100" value="50" id="acc3">
+    <input type="range" min="1" max="100" value="50" id="acc1">
+    <br />
+
+    Hall Sensor
+    <br />
+    <input type="checkbox" id="hall">
+    <br />
+    <script>
+        function s(id){
+            return document.getElementById(id).value
+        }
+        setInterval(
+            function()
+            {
+                console.log(`http://127.0.0.1:8000/record?height=${s("distance")}&CO2=${s("CO2")}&EtOH=${s("EtOH")}&color=${s("color1")}_${s("color2")}_${s("color3")}_&acceleration=${s("acc1")}_${s("acc2")}_${s("acc3")}&hall=${s("hall")}`); 
+                fetch(`http://127.0.0.1:8000/record?height=${s("distance")}&CO2=${s("CO2")}&EtOH=${s("EtOH")}&color=${s("color1")}_${s("color2")}_${s("color3")}_&acceleration=${s("acc1")}_${s("acc2")}_${s("acc3")}&hall=${s("hall")}`);
+            }
+            ,1000
+        )
+    </script>
+
+
+</body>
+
+</html>
