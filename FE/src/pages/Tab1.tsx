@@ -1,6 +1,7 @@
 import { IonList, IonItem, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonGrid, IonRow, IonThumbnail, IonImg, IonLabel } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import { IonCard } from '@ionic/react';
+import Reat ,{useState} from react;
 
 
 import './Tab1.css';
@@ -65,7 +66,6 @@ const chart1 = {
   }
 }
 const Tab1: any = () => {
-
 
 
   return (
